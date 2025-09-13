@@ -1,8 +1,8 @@
 # AVR Webhook Service
 
 [![Discord](https://img.shields.io/discord/1347239846632226998?label=Discord&logo=discord)](https://discord.gg/DFTU69Hg74)
-[![GitHub Repo stars](https://img.shields.io/github/stars/agentvoiceresponse/avr-sts-openai?style=social)](https://github.com/agentvoiceresponse/avr-sts-openai)
-[![Docker Pulls](https://img.shields.io/docker/pulls/agentvoiceresponse/avr-sts-openai?label=Docker%20Pulls&logo=docker)](https://hub.docker.com/r/agentvoiceresponse/avr-sts-openai)
+[![GitHub Repo stars](https://img.shields.io/github/stars/agentvoiceresponse/avr-webhook?style=social)](https://github.com/agentvoiceresponse/avr-webhook)
+[![Docker Pulls](https://img.shields.io/docker/pulls/agentvoiceresponse/avr-webhook?label=Docker%20Pulls&logo=docker)](https://hub.docker.com/r/agentvoiceresponse/avr-webhook)
 [![Ko-fi](https://img.shields.io/badge/Support%20us%20on-Ko--fi-ff5e5b.svg)](https://ko-fi.com/agentvoiceresponse)
 
 A robust Express.js web service designed to handle webhook events from AVR Core. This service provides a clean and intuitive API for processing various types of events generated during voice interactions.
