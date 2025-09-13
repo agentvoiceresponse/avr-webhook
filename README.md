@@ -90,11 +90,11 @@ Main endpoint for receiving webhook events from AVR Core.
 
 | Event Type | Description | Payload Example |
 |------------|-------------|-----------------|
-| `call_started` | Call initiation | `{ callerId, destination }` |
-| `call_ended` | Call termination | `{ duration, reason }` |
-| `transcription` | Speech-to-text result | `{ text, confidence }` |
-| `interruption` | AI response generated | `{ response, model, tokens }` |
-| `error` | Error occurred | `{ message, error, stack }` |
+| `call_started` | Call initiation | `{}` |
+| `call_ended` | Call termination | `{}` |
+| `transcription` | Speech-to-text result | `{ role, text }` |
+| `interruption` | AI response generated | `{}` |
+| `error` | Error occurred | `{ message }` |
 
 ## Configuration
 
