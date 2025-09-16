@@ -116,6 +116,7 @@ app.post('/events', verifyWebhookSecret, async (req, res) => {
       'call_ended',
       'interruption',
       'transcription',
+      'dtmf_digit',
       'error'
     ];
 
@@ -178,6 +179,10 @@ async function processWebhookEvent(uuid, type, timestamp, payload) {
         await handleInterruption(uuid, payload);
         break;
 
+      case 'dtmf_digit':
+        await handleDtmfDigit(uuid, payload);
+        break;
+
       case 'error':
         await handleError(uuid, payload);
         break;
@@ -235,7 +240,28 @@ async function handleCallEnded(uuid, payload) {
 /**
  * Handle interruption events
 /**
+ * Handle DTMF digit events
+/**
+ * Handle DTMF digit events
+ * @param {string} uuid - Event UUID
+ * @param {Object} payload - Event payload
+ */
+async function handleDtmfDigit(uuid, payload) {
+  console.log(`[DTMF_DIGIT] DTMF digit: ${payload?.digit} - UUID: ${uuid}`);
+}
+
+/**
  * Handle interruption events
+/**
+ * Handle interruption events
+ * @param {string} uuid - Event UUID
+ * @param {Object} payload - Event payload
+ */
+async function handleInterruption(uuid, payload) {
+  console.log(`[INTERRUPTION] Interruption - UUID: ${uuid}`);
+}
+
+/**
  * @param {string} uuid - Event UUID
  * @param {Object} payload - Event payload
  */
