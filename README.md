@@ -94,6 +94,7 @@ Main endpoint for receiving webhook events from AVR Core.
 | `call_ended` | Call termination | `{}` |
 | `transcription` | Speech-to-text result | `{ role, text }` |
 | `interruption` | User interruption | `{}` |
+| `dtmf_digit` | User digit | `{ digit }` |
 | `error` | Error occurred | `{ message }` |
 
 ## Configuration
