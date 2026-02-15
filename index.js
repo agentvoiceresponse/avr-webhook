@@ -112,6 +112,7 @@ app.post('/events', verifyWebhookSecret, async (req, res) => {
 
     // Validate event type
     const validEventTypes = [
+      'call_initiated',
       'call_started',
       'call_ended',
       'interruption',
@@ -163,6 +164,10 @@ app.post('/events', verifyWebhookSecret, async (req, res) => {
 async function processWebhookEvent(uuid, type, timestamp, payload) {
   try {
     switch (type) {
+      case 'call_initiated':
+        await handleCallInitiated(uuid, payload);
+        break;
+
       case 'call_started':
         await handleCallStarted(uuid, payload);
         break;
@@ -194,6 +199,32 @@ async function processWebhookEvent(uuid, type, timestamp, payload) {
     console.error(`[ERROR] Failed to process event ${type} for UUID ${uuid}:`, error);
     throw error;
   }
+}
+
+/**
+ * Handle call initiated events
+ * @param {string} uuid - Event UUID
+ * @param {Object} payload - Event payload
+ */
+async function handleCallInitiated(uuid, payload) {
+  console.log(`[CALL_INITIATED] Call initiated - UUID: ${uuid}`);
+
+  // Example: Store call information in database
+  // await database.calls.create({
+  //   uuid,
+  //   startTime: new Date(),
+  //   callerId: payload?.callerId,
+  //   destination: payload?.destination,
+  //   status: 'active'
+  // });
+
+  // Example: Send notification to monitoring system
+  // await notificationService.send('call_initiated', { uuid, payload });
+
+  // Example: Return STS URL with custom parameters
+  return res.json({
+    sts_url: `ws://localhost:6030?uuid=${uuid}&my_custom_param=my_custom_value`,
+  });
 }
 
 /**
