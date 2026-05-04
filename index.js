@@ -6,6 +6,7 @@ const rateLimit = require('express-rate-limit');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || 'localhost';
 
 // Security middleware
 app.use(helmet());
@@ -133,7 +134,7 @@ app.post('/events', verifyWebhookSecret, async (req, res) => {
     }
 
     // Process the event based on type
-    await processWebhookEvent(uuid, type, timestamp, payload);
+    await processWebhookEvent(uuid, type, timestamp, payload, res);
 
     // Send acknowledgment response
     res.status(200).json({
@@ -161,11 +162,11 @@ app.post('/events', verifyWebhookSecret, async (req, res) => {
  * @param {string} timestamp - Event timestamp
  * @param {Object} payload - Event payload data
  */
-async function processWebhookEvent(uuid, type, timestamp, payload) {
+async function processWebhookEvent(uuid, type, timestamp, payload, res) {
   try {
     switch (type) {
       case 'call_initiated':
-        await handleCallInitiated(uuid, payload);
+        await handleCallInitiated(uuid, payload, res);
         break;
 
       case 'call_started':
@@ -206,7 +207,7 @@ async function processWebhookEvent(uuid, type, timestamp, payload) {
  * @param {string} uuid - Event UUID
  * @param {Object} payload - Event payload
  */
-async function handleCallInitiated(uuid, payload) {
+async function handleCallInitiated(uuid, payload, res) {
   console.log(`[CALL_INITIATED] Call initiated - UUID: ${uuid}`);
 
   // Example: Store call information in database
@@ -363,10 +364,10 @@ app.use('*', (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
+app.listen(PORT, HOST, () => {
   console.log(`🚀 AVR Webhook Service running on port ${PORT}`);
-  console.log(`📡 Health check: http://localhost:${PORT}/health`);
-  console.log(`🎯 Webhook endpoint: http://localhost:${PORT}/events`);
+  console.log(`📡 Health check: http://${HOST}:${PORT}/health`);
+  console.log(`🎯 Webhook endpoint: http://${HOST}:${PORT}/events`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
 });
 
