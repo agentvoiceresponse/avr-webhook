@@ -6,7 +6,6 @@ const rateLimit = require('express-rate-limit');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || 'localhost';
 
 // Security middleware
 app.use(helmet());
@@ -364,10 +363,10 @@ app.use('*', (req, res) => {
 });
 
 // Start server
-app.listen(PORT, HOST, () => {
+app.listen(PORT, () => {
   console.log(`🚀 AVR Webhook Service running on port ${PORT}`);
-  console.log(`📡 Health check: http://${HOST}:${PORT}/health`);
-  console.log(`🎯 Webhook endpoint: http://${HOST}:${PORT}/events`);
+  console.log(`📡 Health check: http://0.0.0.0:${PORT}/health`);
+  console.log(`🎯 Webhook endpoint: http://0.0.0.0:${PORT}/events`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
 });
 
